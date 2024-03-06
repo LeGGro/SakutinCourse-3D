@@ -19,6 +19,6 @@ public class SphereMoving : MonoBehaviour
 
     public void Move() 
     {
-        transform.position += _direction.normalized * _speed * _path.Evaluate(time += Time.deltaTime);
+        transform.position += _direction.normalized * _speed * _path.Evaluate(time += Time.deltaTime) *Time.deltaTime;
     }
 }

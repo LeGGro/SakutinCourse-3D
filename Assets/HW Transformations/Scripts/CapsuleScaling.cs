@@ -16,6 +16,6 @@ public class CapsuleScaling : MonoBehaviour
 
     private void Scale()
     {
-        transform.localScale += new Vector3(_speed, _speed, _speed) * _curve.Evaluate(time += Time.deltaTime);
+        transform.localScale += new Vector3(_speed, _speed, _speed) * _curve.Evaluate(time += Time.deltaTime) * Time.deltaTime;
     }
 }

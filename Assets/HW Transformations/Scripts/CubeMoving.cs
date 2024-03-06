@@ -11,9 +11,9 @@ public class CubeMoving : MonoBehaviour
 
     void Update()
     {
+        Move();
         Rotate();
         Scale();
-        Move();
     }
 
     private void Scale()
