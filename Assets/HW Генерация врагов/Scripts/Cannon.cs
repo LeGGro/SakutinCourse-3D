@@ -1,42 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private float _timestep;
     [SerializeField] private Transform _outPointPosition;
     [SerializeField] private Transform _ballSpawnPosition;
-    [SerializeField] private GameObject _ballSample;
+    [SerializeField] private Ball _ballSample;
     [SerializeField] private int _forceAmount;
-
-    private GameObject _currentBall;
+    [SerializeField] private List<Ball> _ballPool;
+    [SerializeField] private Ball _currentBall;
 
     public void Start()
     {
-        StartCoroutine(ShootByTimestamp());
+        StartCoroutine(ShootRepeating());
     }
 
-    private void SpawnBall()
+    private void Spawn()
     {
-        if (_currentBall != null)
-        {
-            return;
-        }
-
-        _currentBall = Instantiate(_ballSample, _ballSpawnPosition.transform.position, _ballSpawnPosition.rotation);
+        _currentBall = Instantiate
+            (
+            _ballSample.gameObject, 
+            _ballSpawnPosition.transform.position,
+            _ballSpawnPosition.rotation
+            ).GetComponent<Ball>();
     }
 
-    private void ShootBall()
+    public void LoadBall()
     {
-        Vector3 forceDirection = (_outPointPosition.transform.position - _ballSpawnPosition.transform.position).normalized;
-        _currentBall.GetComponent<Rigidbody>().AddForce(forceDirection*_forceAmount, ForceMode.Impulse);
-        _currentBall = null;
+        _currentBall.transform.position = _ballSpawnPosition.position;
     }
 
-    private IEnumerator ShootByTimestamp()
+    private void PullBall()
+    {
+        _currentBall = _ballPool.First();
+        _ballPool.Add(_currentBall);
+        _ballPool.RemoveAt(0);
+    }
+
+    private void Shoot()
+    {
+        PullBall();
+        LoadBall();
+        _currentBall.AddDirectionalForce(_outPointPosition.position - _ballSpawnPosition.position, _forceAmount);
+    }
+
+    private IEnumerator ShootRepeating()
     {
         float elapsedTime = 0f;
 
@@ -46,8 +61,7 @@ public class Cannon : MonoBehaviour
 
             if (elapsedTime >= _timestep)
             {
-                SpawnBall();
-                ShootBall();
+                Shoot();
                 elapsedTime = 0f;
             }
 

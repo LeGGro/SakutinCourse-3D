@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeDuration: 3
+  _poolCoordinates: {fileID: 0}
