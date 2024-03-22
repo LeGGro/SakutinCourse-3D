@@ -1,20 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private float _timestep;
     [SerializeField] private Transform _outPointPosition;
     [SerializeField] private Transform _ballSpawnPosition;
-    [SerializeField] private Ball _ballSample;
+    [SerializeField] private Ball _ballPrefab;
     [SerializeField] private int _forceAmount;
-    [SerializeField] private List<Ball> _ballPool;
     [SerializeField] private Ball _currentBall;
 
     public void Start()
@@ -25,47 +18,21 @@ public class Cannon : MonoBehaviour
     private void Spawn()
     {
         _currentBall = Instantiate
-            (
-            _ballSample.gameObject, 
-            _ballSpawnPosition.transform.position,
-            _ballSpawnPosition.rotation
-            ).GetComponent<Ball>();
-    }
-
-    public void LoadBall()
-    {
-        _currentBall.transform.position = _ballSpawnPosition.position;
-    }
-
-    private void PullBall()
-    {
-        _currentBall = _ballPool.First();
-        _ballPool.Add(_currentBall);
-        _ballPool.RemoveAt(0);
+        (_ballPrefab, _ballSpawnPosition.transform.position, _ballSpawnPosition.rotation);
     }
 
     private void Shoot()
     {
-        PullBall();
-        LoadBall();
+        Spawn();
         _currentBall.AddDirectionalForce(_outPointPosition.position - _ballSpawnPosition.position, _forceAmount);
     }
 
     private IEnumerator ShootRepeating()
     {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < _timestep) 
+        while (true)
         {
-            elapsedTime += Time.deltaTime;
-
-            if (elapsedTime >= _timestep)
-            {
-                Shoot();
-                elapsedTime = 0f;
-            }
-
-            yield return null;
+            Shoot();
+            yield return new WaitForSeconds(_timestep);
         }
     }
 }
