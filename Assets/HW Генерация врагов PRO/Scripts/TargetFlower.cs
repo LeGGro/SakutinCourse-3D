@@ -9,6 +9,7 @@ using UnityEngine;
 public class TargetFlower : MonoBehaviour
 {
     [SerializeField] private List<Transform> _pathPoints;
+    [SerializeField] private float _closeRange;
     [SerializeField] private float _speed;
     [SerializeField] private GameObject _pathSample;
 
@@ -16,28 +17,35 @@ public class TargetFlower : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(MovePathRepeating());
+        StartCoroutine(PathMoving());
     }
 
-    private IEnumerator MovePathRepeating()
+    private IEnumerator PathMoving()
     {
         while (true) 
         {
+            if (IsCloseUp())
+            {
+                ChangePathPoint();
+            }
+
             transform.Translate((_pathPoints[_currentTargetIndex].transform.position - transform.position).normalized * _speed * Time.deltaTime, Space.World);
             yield return null;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private bool IsCloseUp()
     {
-        if (other.tag == _pathSample.tag)
+        if ((transform.position - _pathPoints[_currentTargetIndex].position).magnitude <= _closeRange)
         {
-            ChangePathPoint();
+            return true;
         }
+
+        return false;
     }
 
     private void ChangePathPoint()
     {
-        _currentTargetIndex = (_currentTargetIndex + 1) % _pathPoints.Count;
+        _currentTargetIndex = (++_currentTargetIndex) % _pathPoints.Count;
     }
 }

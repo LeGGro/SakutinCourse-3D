@@ -10,10 +10,10 @@ public class Bee : MonoBehaviour
     public void FollowTarget(TargetFlower targetFlower)
     {
         _targetFlower = targetFlower;
-        StartCoroutine(FollowRepeating());
+        StartCoroutine(Following());
     }
 
-    public IEnumerator FollowRepeating() 
+    public IEnumerator Following() 
     {
         while (true) 
         {

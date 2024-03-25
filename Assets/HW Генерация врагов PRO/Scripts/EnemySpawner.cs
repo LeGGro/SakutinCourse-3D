@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hive : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float _spawnDelay;
     [SerializeField] private TargetFlower _beeTarget;
