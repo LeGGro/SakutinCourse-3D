@@ -6,12 +6,11 @@ using UnityEditor.U2D.Aseprite;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class TargetFlower : MonoBehaviour
+public class PathFollower : MonoBehaviour
 {
     [SerializeField] private List<Transform> _pathPoints;
     [SerializeField] private float _closeRange;
     [SerializeField] private float _speed;
-    [SerializeField] private GameObject _pathSample;
 
     private int _currentTargetIndex;
 
@@ -29,6 +28,7 @@ public class TargetFlower : MonoBehaviour
                 ChangePathPoint();
             }
 
+            transform.LookAt(_pathPoints[_currentTargetIndex].transform);
             transform.Translate((_pathPoints[_currentTargetIndex].transform.position - transform.position).normalized * _speed * Time.deltaTime, Space.World);
             yield return null;
         }

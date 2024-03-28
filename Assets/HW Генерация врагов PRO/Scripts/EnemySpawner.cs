@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float _spawnDelay;
-    [SerializeField] private TargetFlower _beeTarget;
+    [SerializeField] private PathFollower _beeTarget;
     [SerializeField] private Bee _beePrefab;
     [SerializeField] private Transform _beeSpawnPoint;
 

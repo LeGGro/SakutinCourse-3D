@@ -5,9 +5,9 @@ using UnityEngine;
 public class Bee : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private TargetFlower _targetFlower;
+    [SerializeField] private PathFollower _targetFlower;
 
-    public void FollowTarget(TargetFlower targetFlower)
+    public void FollowTarget(PathFollower targetFlower)
     {
         _targetFlower = targetFlower;
         StartCoroutine(Following());
