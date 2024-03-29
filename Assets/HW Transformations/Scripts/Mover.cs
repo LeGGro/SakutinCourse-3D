@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mover : MonoBehaviour
+namespace HWTransformations
 {
-    [SerializeField] private float _speed;
-
-    private void Update()
+    public class Mover : MonoBehaviour
     {
-        transform.Translate(transform.forward * _speed * Time.deltaTime, Space.World);
+        [SerializeField] private float _speed;
+
+        private void Update()
+        {
+            transform.Translate(transform.forward * _speed * Time.deltaTime, Space.World);
+        }
     }
 }

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+namespace HWTransformations
 {
-    [SerializeField] private float _speed; 
-
-    private void Update()
+    public class Rotator : MonoBehaviour
     {
-        transform.Rotate(new Vector3(0, _speed, 0) * Time.deltaTime);
+        [SerializeField] private float _speed;
+
+        private void Update()
+        {
+            transform.Rotate(new Vector3(0, _speed, 0) * Time.deltaTime);
+        }
     }
 }

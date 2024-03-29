@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class Scaler : MonoBehaviour
+namespace HWTransformations
 {
-    [SerializeField] private float _speed;
-
-    private void Update()
+    public class Scaler : MonoBehaviour
     {
-        transform.localScale += Vector3.one * _speed * Time.deltaTime;
+        [SerializeField] private float _speed;
+
+        private void Update()
+        {
+            transform.localScale += Vector3.one * _speed * Time.deltaTime;
+        }
     }
 }

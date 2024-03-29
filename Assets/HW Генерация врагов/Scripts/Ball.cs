@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class Ball : MonoBehaviour
+namespace HWEnemyGeneration
 {
-    [SerializeField] private float _lifeDuration;
-    [SerializeField] private Rigidbody _rigidbody;
-
-    public void Start()
+    [RequireComponent(typeof(Rigidbody))]
+    public class Ball : MonoBehaviour
     {
-        Destroy(gameObject, _lifeDuration);
-    }
+        [SerializeField] private float _lifeDuration;
+        [SerializeField] private Rigidbody _rigidbody;
 
-    public void AddDirectionalForce(Vector3 direction, float forceAmount)
-    {
-        _rigidbody.AddForce(direction.normalized * forceAmount, ForceMode.Impulse);
+        public void Start()
+        {
+            Destroy(gameObject, _lifeDuration);
+        }
+
+        public void AddDirectionalForce(Vector3 direction, float forceAmount)
+        {
+            _rigidbody.AddForce(direction.normalized * forceAmount, ForceMode.Impulse);
+        }
     }
 }
