@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HWSignalization
 {
-    [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(EnemyDetector))]
 
     public class Signalization : MonoBehaviour
     {
@@ -14,30 +13,47 @@ namespace HWSignalization
 
         [SerializeField] private float _deltaStep;
 
+        private EnemyDetector _enemyDetector;
         private AudioSource _audioSource;
         private Coroutine _currentCoroutine;
 
-        public void Start()
+        public void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _enemyDetector = GetComponent<EnemyDetector>();
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnEnable()
         {
-            if (other.gameObject.TryGetComponent(out HWEnemyGenerationPRO.PathFollower enemy))
-            {
-                StopCoroutine(_currentCoroutine);
-                _currentCoroutine = StartCoroutine(ChangeVolumeSmoothly(MaxVolume));
-            }
+            _enemyDetector.OnEnemyEntered += StartSiren;
+            _enemyDetector.OnEnemyExited += StopSiren;
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnDisable()
         {
-            if (other.gameObject.TryGetComponent(out HWEnemyGenerationPRO.PathFollower enemy))
+            _enemyDetector.OnEnemyEntered -= StartSiren;
+            _enemyDetector.OnEnemyExited -= StopSiren;
+        }
+
+        public void StartSiren()
+        {
+            if (_currentCoroutine != null)
+            { 
+                StopCoroutine(_currentCoroutine);
+            }
+
+            _currentCoroutine = StartCoroutine(ChangeVolumeSmoothly(MaxVolume));
+
+        }
+
+        public void StopSiren()
+        {
+            if (_currentCoroutine != null)
             {
                 StopCoroutine(_currentCoroutine);
-                _currentCoroutine = StartCoroutine(ChangeVolumeSmoothly(MinVolume));
             }
+
+            _currentCoroutine = StartCoroutine(ChangeVolumeSmoothly(MinVolume));
         }
 
         private IEnumerator ChangeVolumeSmoothly(float value)
