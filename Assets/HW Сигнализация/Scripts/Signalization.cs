@@ -25,14 +25,14 @@ namespace HWSignalization
 
         private void OnEnable()
         {
-            _enemyDetector.OnEnemyEntered += StartSiren;
-            _enemyDetector.OnEnemyExited += StopSiren;
+            _enemyDetector.EnemyEntered += StartSiren;
+            _enemyDetector.EnemyExited += StopSiren;
         }
 
         private void OnDisable()
         {
-            _enemyDetector.OnEnemyEntered -= StartSiren;
-            _enemyDetector.OnEnemyExited -= StopSiren;
+            _enemyDetector.EnemyEntered -= StartSiren;
+            _enemyDetector.EnemyExited -= StopSiren;
         }
 
         public void StartSiren()

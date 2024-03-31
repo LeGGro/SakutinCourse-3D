@@ -10,14 +10,14 @@ namespace HWSignalization
 
     public class EnemyDetector : MonoBehaviour
     {
-        [SerializeField] public event Action OnEnemyEntered;
-        [SerializeField] public event Action OnEnemyExited;
+        public event Action EnemyEntered;
+        public event Action EnemyExited;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent(out HWEnemyGenerationPRO.PathFollower enemy))
             {
-                OnEnemyEntered?.Invoke();
+                EnemyEntered?.Invoke();
             }
         }
 
@@ -25,7 +25,7 @@ namespace HWSignalization
         {
             if (other.gameObject.TryGetComponent(out HWEnemyGenerationPRO.PathFollower enemy))
             {
-                OnEnemyExited?.Invoke();
+                EnemyExited?.Invoke();
             }
         }
     }
