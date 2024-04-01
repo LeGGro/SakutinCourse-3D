@@ -58,11 +58,18 @@ namespace HWSignalization
 
         private IEnumerator ChangeVolumeSmoothly(float value)
         {
+            _audioSource.enabled = true;
+
             while (_audioSource.volume != value)
             {
-                _audioSource.volume = Mathf.Clamp01(Mathf.MoveTowards(_audioSource.volume, value, _deltaStep * Time.deltaTime));
+                _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, value, _deltaStep * Time.deltaTime);
                 yield return null;
             }
+
+            if(_audioSource.volume == MinVolume) 
+            { 
+                _audioSource.enabled = false;
+            } 
         }
     }
 }
