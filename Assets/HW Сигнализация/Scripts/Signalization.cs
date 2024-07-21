@@ -43,7 +43,6 @@ namespace HWSignalization
             }
 
             _currentCoroutine = StartCoroutine(ChangeVolumeSmoothly(MaxVolume));
-
         }
 
         public void StopSiren()
