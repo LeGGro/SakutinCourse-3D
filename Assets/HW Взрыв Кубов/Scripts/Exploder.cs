@@ -1,16 +1,21 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
-    [SerializeField] private float _explosionForce = 1f;
-    [SerializeField] private float _explosionRadius = 1f;
+    [SerializeField] private float _baseEplosionForce = 5f;
+    [SerializeField] private float _baseExplosionRadius = 5f;
 
-    public void Explode(List<ClickableObject> clickableObjects, Vector3 explosionPosition)
+    public void Explode(Vector3 explosionPosition, int multiplier)
     {
-        foreach (var obj in clickableObjects)
+        List<Rigidbody> explodedObjects = Physics.OverlapSphere(explosionPosition, _baseExplosionRadius * multiplier)
+            .Select(collider => collider.attachedRigidbody)
+            .ToList();
+
+        foreach (var obj in explodedObjects)
         {
-            obj.Rigidbody.AddExplosionForce(_explosionForce, explosionPosition, _explosionRadius);
+            obj.AddExplosionForce(_baseEplosionForce * multiplier, explosionPosition, _baseExplosionRadius * multiplier);
         }
     }
 }

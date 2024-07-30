@@ -1219,8 +1219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac34ab9a7efa894ab4d902ebda28d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionForce: 1000
-  _explosionRadius: 5
+  _baseEplosionForce: 50
+  _baseExplosionRadius: 50
 --- !u!4 &751577886
 Transform:
   m_ObjectHideFlags: 0
@@ -2051,7 +2051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858522244}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10067024, y: -0.2678126, z: 0.028149113, w: 0.9577837}
+  m_LocalRotation: {x: 0.10067023, y: -0.26781258, z: 0.02814911, w: 0.9577837}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
