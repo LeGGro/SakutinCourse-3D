@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Renderer))]
 public class FallingObject : MonoBehaviour
 {
-    [SerializeField] private float _lifetimeRangeMin  = 2;
+    [SerializeField] private float _lifetimeRangeMin = 2;
     [SerializeField] private float _lifetimeRangeMax = 5;
     private WaitForSeconds _waitForSeconds;
     private Material _material;
@@ -43,6 +43,7 @@ public class FallingObject : MonoBehaviour
     {
         yield return _waitForSeconds;
         ObjPool.Add(this);
+        StopCoroutine(_activeCoroutine);
         _activeCoroutine = null;
     }
 }

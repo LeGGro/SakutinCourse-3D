@@ -33,8 +33,9 @@ public class PoolSpawner : MonoBehaviour
             if (FallingObject.ObjPool.Count > 0)
             {
                 SpawnFromPool();
-                continue;
             }
+
+            yield return null;
         }
     }
 }
