@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(Renderer))]
-public class FallingObject : MonoBehaviour
+public class PoolObject : MonoBehaviour
 {
     [SerializeField] private float _lifetimeRangeMin = 2;
     [SerializeField] private float _lifetimeRangeMax = 5;
@@ -11,11 +11,11 @@ public class FallingObject : MonoBehaviour
     private Material _material;
     private Coroutine _activeCoroutine;
 
-    public static List<FallingObject> ObjPool { get; private set; } = null;
+    public static List<PoolObject> ObjPool { get; private set; } = null;
 
     private void Awake()
     {
-        ObjPool ??= new List<FallingObject>();
+        ObjPool ??= new List<PoolObject>();
         _waitForSeconds = new WaitForSeconds(Random.Range(_lifetimeRangeMin, _lifetimeRangeMax));
         _material = GetComponent<Renderer>().material;
     }
