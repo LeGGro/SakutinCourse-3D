@@ -1,15 +1,20 @@
 using System.Collections;
-using System.Linq;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
-public class PoolSpreader : MonoBehaviour
+public class Spreader : MonoBehaviour
 {
+    [SerializeField] private PoolSpawner _spawner;
+    [SerializeField] private float _spawnCooldown;
     [SerializeField] private Transform _bottomLeftPosition;
     [SerializeField] private Transform _topLeftPosition;
     [SerializeField] private Transform _topRightPosition;
 
+    private WaitForSeconds _waitForSeconds;
+
     private void Start()
     {
+        _waitForSeconds = new WaitForSeconds(_spawnCooldown);
         StartCoroutine(Spawning());
     }
 
@@ -21,21 +26,17 @@ public class PoolSpreader : MonoBehaviour
         return new Vector3(randomX, _bottomLeftPosition.position.y, randomZ);
     }
 
-    public void SpawnFromPool()
+    public void SetToPosition()
     {
-        PoolObject.ObjPool.First().Initialize(GetRandomPosition());
+        _spawner.GetObjectFromPool().Initialize(GetRandomPosition());
     }
 
     private IEnumerator Spawning()
     {
         while (true)
         {
-            if (PoolObject.ObjPool.Count > 0)
-            {
-                SpawnFromPool();
-            }
-
-            yield return null;
+            SetToPosition();
+            yield return _waitForSeconds;
         }
     }
 }

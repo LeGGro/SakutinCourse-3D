@@ -11,11 +11,10 @@ public class PoolObject : MonoBehaviour
     private Material _material;
     private Coroutine _activeCoroutine;
 
-    public static List<PoolObject> ObjPool { get; private set; } = null;
+    public bool IsReady { get; private set; } = true;
 
     private void Awake()
     {
-        ObjPool ??= new List<PoolObject>();
         _waitForSeconds = new WaitForSeconds(Random.Range(_lifetimeRangeMin, _lifetimeRangeMax));
         _material = GetComponent<Renderer>().material;
     }
@@ -35,14 +34,14 @@ public class PoolObject : MonoBehaviour
 
     public void Initialize(Vector3 position)
     {
-        ObjPool.Remove(this);
+        IsReady = false;
         transform.position = position;
     }
 
     private IEnumerator LifetimeCountdown()
     {
         yield return _waitForSeconds;
-        ObjPool.Add(this);
+        IsReady = true;
         StopCoroutine(_activeCoroutine);
         _activeCoroutine = null;
     }

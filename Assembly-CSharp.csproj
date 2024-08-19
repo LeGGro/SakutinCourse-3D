@@ -62,12 +62,13 @@
   <ItemGroup>
     <Compile Include="Assets\HW Дождь кубов\Scripts\PoolObject.cs" />
     <Compile Include="Assets\HW Transformations\Scripts\Mover.cs" />
-    <Compile Include="Assets\HW Дождь кубов\Scripts\PoolSpreader.cs" />
     <Compile Include="Assets\HW Сигнализация\Scripts\EnemyDetector.cs" />
     <Compile Include="Assets\HW Генерация врагов\Scripts\Ball.cs" />
     <Compile Include="Assets\HW Transformations\Scripts\Rotator.cs" />
     <Compile Include="Assets\HW Генерация врагов PRO\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\HW Взрыв Кубов\Scripts\ScoreCounter.cs" />
+    <Compile Include="Assets\HW Дождь кубов\Scripts\PoolSpawner.cs" />
+    <Compile Include="Assets\HW Дождь кубов\Scripts\Spreader.cs" />
     <Compile Include="Assets\HW Генерация врагов\Scripts\Cannon.cs" />
     <Compile Include="Assets\HW Взрыв Кубов\Scripts\GameStarter.cs" />
     <Compile Include="Assets\HW Генерация врагов PRO\Scripts\PathFollower.cs" />
