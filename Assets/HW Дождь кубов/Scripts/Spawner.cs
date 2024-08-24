@@ -7,8 +7,8 @@ namespace CubeRain
 {
     public class Spawner : MonoBehaviour
     {
-        [SerializeField] private Pool _spawner;
-        [SerializeField] private float _spawnCooldown;
+        [SerializeField] private Pool _pool;
+        [SerializeField] private float _cooldown;
         [SerializeField] private Transform _bottomLeftPosition;
         [SerializeField] private Transform _topLeftPosition;
         [SerializeField] private Transform _topRightPosition;
@@ -17,7 +17,7 @@ namespace CubeRain
 
         private void Start()
         {
-            _waitForSeconds = new WaitForSeconds(_spawnCooldown);
+            _waitForSeconds = new WaitForSeconds(_cooldown);
             StartCoroutine(Spawning());
         }
 
@@ -29,16 +29,16 @@ namespace CubeRain
             return new Vector3(randomX, _bottomLeftPosition.position.y, randomZ);
         }
 
-        public void SetToPosition()
+        public void InitializePoolObject()
         {
-            _spawner.GetObjectFromPool().Initialize(GetRandomPosition());
+            _pool.GetObject().Initialize(GetRandomPosition());
         }
 
         private IEnumerator Spawning()
         {
             while (true)
             {
-                SetToPosition();
+                InitializePoolObject();
                 yield return _waitForSeconds;
             }
         }

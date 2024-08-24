@@ -6,30 +6,29 @@ namespace CubeRain
 {
     public class Pool : MonoBehaviour
     {
-        [SerializeField] private int _maxPoolSize;
-        [SerializeField] private Object _poolObjectPrefab;
-        [SerializeField] private Transform _poolObjectsParent;
+        [SerializeField] private Object _objectPrefab;
+        [SerializeField] private Transform _objectsParent;
 
-        private List<Object> _objPool = null;
+        private List<Object> _objects = null;
 
         private void Awake()
         {
-            _objPool = new List<Object>();
+            _objects = new List<Object>();
         }
 
-        public Object GetObjectFromPool()
+        public Object GetObject()
         {
-            if (_objPool.Where(obj => obj.IsReady).Count() == 0 && _objPool.Count <= _maxPoolSize)
+            if (_objects.Where(obj => obj.IsReady).Count() == 0)
             {
-                AddToPool();
+                CreateObject();
             }
 
-            return _objPool.First(obj => obj.IsReady == true);
+            return _objects.First(obj => obj.IsReady == true);
         }
 
-        private void AddToPool()
+        private void CreateObject()
         {
-            _objPool.Add(Instantiate(_poolObjectPrefab, _poolObjectsParent));
+            _objects.Add(Instantiate(_objectPrefab, _objectsParent));
         }
     }
 }
