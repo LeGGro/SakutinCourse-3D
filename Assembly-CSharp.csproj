@@ -74,12 +74,15 @@
     <Compile Include="Assets\HW Взрыв Кубов\Scripts\Spawner.cs" />
     <Compile Include="Assets\HW Взрыв Кубов\Scripts\Exploder.cs" />
     <Compile Include="Assets\HW Сигнализация\Scripts\Signalization.cs" />
+    <Compile Include="Assets\HW Создание главного меню\VirtualClock.cs" />
     <Compile Include="Assets\HW Взрыв Кубов\Scripts\ClickableObject.cs" />
     <Compile Include="Assets\HW Дождь кубов\Scripts\Floor.cs" />
     <Compile Include="Assets\HW Дождь кубов\Scripts\Pool.cs" />
     <Compile Include="Assets\HW Transformations\Scripts\Scaler.cs" />
     <Compile Include="Assets\HW Генерация врагов PRO\Scripts\Bee.cs" />
     <Compile Include="Assets\HW Счетчик\Scripts\Counter.cs" />
+    <Compile Include="Assets\HW Audio Mixer\AudioPanel.cs" />
+    <Compile Include="Assets\HW Создание главного меню\TabsTogler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\DownloadedResources\TextMesh Pro\Shaders\TMPro.cginc" />

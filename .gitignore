@@ -15,15 +15,9 @@
 
 # Mono auto generated files
 mono_crash.*
-
-/Library
-/.plastic
-/Logs
 /obj
-/Packages
-/ProjectSettings
-/Temp
-/UserSettings
+/.plastic
+/Library
 
 # Build results
 [Dd]ebug/

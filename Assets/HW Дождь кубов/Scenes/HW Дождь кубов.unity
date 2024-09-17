@@ -437,8 +437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7a305c8dfd0bd448ad970603681dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 584372283}
-  _spawnCooldown: 0.1
+  _pool: {fileID: 584372283}
+  _cooldown: 0.1
   _bottomLeftPosition: {fileID: 1847074643}
   _topLeftPosition: {fileID: 451430752}
   _topRightPosition: {fileID: 2108108029}
@@ -870,9 +870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea93dde74cebbba41a2f6da73c3b8953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPoolSize: 100
-  _poolObjectPrefab: {fileID: 2863482889964343704, guid: c14e1385eab293a409e3f07753ee9460, type: 3}
-  _poolObjectsParent: {fileID: 38138877}
+  _objectPrefab: {fileID: 2863482889964343704, guid: c14e1385eab293a409e3f07753ee9460, type: 3}
+  _objectsParent: {fileID: 38138877}
 --- !u!4 &584372284
 Transform:
   m_ObjectHideFlags: 0
