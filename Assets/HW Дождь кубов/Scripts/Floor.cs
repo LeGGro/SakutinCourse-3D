@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class Floor : MonoBehaviour
+namespace Assets.HW_Дождь_кубов.Scripts
 {
+	public class Floor : MonoBehaviour
+	{
+	} 
 }

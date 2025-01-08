@@ -1,24 +1,30 @@
-using System.Collections;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using static Assets.HW_Дождь_кубов.Scripts.SpawnEventSignalizator;
 
 
-namespace CubeRain
+namespace Assets.HW_Дождь_кубов.Scripts
 {
     public class Spawner : MonoBehaviour
     {
         [SerializeField] private Pool _pool;
-        [SerializeField] private float _cooldown;
+        [SerializeField] private SpawnEventSignalizator _spawnSignal;
         [SerializeField] private Transform _bottomLeftPosition;
         [SerializeField] private Transform _topLeftPosition;
         [SerializeField] private Transform _topRightPosition;
 
-        private WaitForSeconds _waitForSeconds;
-
-        private void Start()
+        private void OnEnable()
         {
-            _waitForSeconds = new WaitForSeconds(_cooldown);
-            StartCoroutine(Spawning());
+            _spawnSignal.SpawnAction += Spawn;
+        }
+
+        private void OnDisable()
+        {
+            _spawnSignal.SpawnAction -= Spawn;
+        }
+
+        public void Spawn(Vector3 transform = default)
+        {
+            InitializePoolObject(transform == default ? GetRandomPosition() : transform);
         }
 
         private Vector3 GetRandomPosition()
@@ -29,18 +35,10 @@ namespace CubeRain
             return new Vector3(randomX, _bottomLeftPosition.position.y, randomZ);
         }
 
-        public void InitializePoolObject()
+        private void InitializePoolObject(Vector3 position)
         {
-            _pool.GetObject().Initialize(GetRandomPosition());
+            _pool.GetObject().Initialize(position);
         }
 
-        private IEnumerator Spawning()
-        {
-            while (true)
-            {
-                InitializePoolObject();
-                yield return _waitForSeconds;
-            }
-        }
-    } 
+    }
 }

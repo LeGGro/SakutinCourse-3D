@@ -1,29 +1,40 @@
+using Assets.HW_Дождь_кубов.Scripts.Bases;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace CubeRain
+namespace Assets.HW_Дождь_кубов.Scripts
 {
-    public class Pool : MonoBehaviour
+    public class Pool : SpawnEventSignalizator
     {
-        [SerializeField] private Object _objectPrefab;
+        [SerializeField] private PoolObjectBase _objectPrefab;
         [SerializeField] private Transform _objectsParent;
 
-        private List<Object> _objects = null;
+        private List<PoolObjectBase> _objects = null;
+
+        public override event SpawnActionHandler SpawnAction;
 
         private void Awake()
         {
-            _objects = new List<Object>();
+            _objects = new List<PoolObjectBase>();
         }
 
-        public Object GetObject()
+        public PoolObjectBase GetObject()
         {
+            bool isCreated = false;
+
             if (_objects.Where(obj => obj.IsReady).Count() == 0)
             {
                 CreateObject();
+                isCreated = true;
             }
 
-            return _objects.First(obj => obj.IsReady == true);
+            PoolObjectBase choosedObj = _objects.First(obj => obj.IsReady == true);
+
+            if (!isCreated)
+                SpawnAction?.Invoke(choosedObj.transform.position);
+
+            return choosedObj;
         }
 
         private void CreateObject()
