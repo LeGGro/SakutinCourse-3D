@@ -1,12 +1,11 @@
+using Assets.HW_CubeRain.Scripts.Bases;
 using UnityEngine;
-using static Assets.HW_CubeRain.Scripts.SpawnEventSignalizator;
-
 
 namespace Assets.HW_CubeRain.Scripts
 {
-    public class Spawner : MonoBehaviour
+    public class Spawner<T> : MonoBehaviour where T : PoolObjectBase
     {
-        [SerializeField] private Pool _pool;
+        [SerializeField] private Pool<T> _pool;
         [SerializeField] private SpawnEventSignalizator _spawnSignal;
         [SerializeField] private Transform _bottomLeftPosition;
         [SerializeField] private Transform _topLeftPosition;

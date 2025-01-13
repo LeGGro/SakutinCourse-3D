@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Assets.HW_CubeRain.Scripts
 {
     [RequireComponent(typeof(Rigidbody), typeof(Renderer))]
-    public class BombExplosingPoolObject: PoolObjectBase
+    public class BombObject: PoolObjectBase
     {
         [SerializeField] private float _lifetimeRangeMin = 2;
         [SerializeField] private float _lifetimeRangeMax = 5;

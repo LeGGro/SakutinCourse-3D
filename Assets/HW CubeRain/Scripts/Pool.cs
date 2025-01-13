@@ -6,13 +6,14 @@ using UnityEngine;
 
 namespace Assets.HW_CubeRain.Scripts
 {
-    public class Pool : SpawnEventSignalizator
+    public class Pool<T> : SpawnEventSignalizator where T : PoolObjectBase
     {
         [SerializeField] private ConsoleInfo _consoleInfo;
-        [SerializeField] private PoolObjectBase _objectPrefab;
+        [SerializeField] private T _objectPrefab;
         [SerializeField] private Transform _objectsParent;
         [SerializeField] private float _infoUpdaterTimer;
 
+        private PoolObjectBase _objectBase;
         private WaitForSeconds _waitForInfoUpdaterTimer;
         private int _poolUseCount = 0;
         private List<PoolObjectBase> _objects = null;
@@ -21,6 +22,7 @@ namespace Assets.HW_CubeRain.Scripts
                 $"ахўчћ: {_poolUseCount}"; }
 
         public override event SpawnActionHandler SpawnAction;
+
 
         private void Awake()
         {
